@@ -1,6 +1,7 @@
 package com.tests.login;
 
-import com.framework.models.User;
+import com.framework.models.UserDto;
+import com.framework.models.UserModel;
 import com.framework.pages.DashboardPage;
 import com.framework.pages.LoginPage;
 import com.tests.base.BaseUiTest;
@@ -23,7 +24,7 @@ public class LoginPositiveTest extends BaseUiTest {
     @Description("Проверка, что пользователь может войти с правильным логином/паролем")
     public void shouldLoginWithValidCredentials() {
         // Arrange
-        User validUser = User.builder()
+        UserDto validUser = UserDto.builder()
                 .username("admin")
                 .password("admin123")
                 .build();

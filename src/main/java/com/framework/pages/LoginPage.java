@@ -1,6 +1,6 @@
 package com.framework.pages;
 
-import com.framework.models.User;
+import com.framework.models.UserDto;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
@@ -52,7 +52,7 @@ public class LoginPage extends BasePage<LoginPage> {
     }
 
     @Step("Выполнить вход с пользователем")
-    public LoginPage loginAs(User user) {
+    public LoginPage loginAs(UserDto user) {
         return loginAs(user.getUsername(), user.getPassword());
     }
 
