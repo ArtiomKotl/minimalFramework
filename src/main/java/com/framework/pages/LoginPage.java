@@ -3,6 +3,7 @@ package com.framework.pages;
 import com.codeborne.selenide.SelenideElement;
 import com.framework.forms.LoginForm;
 import com.framework.forms.LoginFormInterface;
+import com.framework.forms.form.UIform;
 import com.framework.models.UserDto;
 import io.qameta.allure.Step;
 
@@ -15,9 +16,9 @@ public class LoginPage extends BasePage<LoginPage> {
     // Селекторы как константы
 
 
-    private final LoginFormInterface loginForm;
+    private final LoginForm loginForm;
 
-    public LoginPage(LoginFormInterface loginForm){
+    public LoginPage(LoginForm loginForm){
         this.loginForm = loginForm;
     }
 
