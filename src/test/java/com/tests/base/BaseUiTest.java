@@ -2,6 +2,8 @@ package com.tests.base;
 
 import com.codeborne.selenide.Selenide;
 import com.framework.config.SelenideConfig;
+import com.framework.forms.LoginForm;
+import com.framework.forms.LoginFormInterface;
 import com.framework.pages.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,6 +18,22 @@ import static com.codeborne.selenide.Selenide.clearBrowserLocalStorage;
 public abstract class BaseUiTest {
     protected static final Logger log = LoggerFactory.getLogger(BaseUiTest.class);
     protected LoginPage loginPage;
+    protected LoginFormInterface loginForm;
+
+    /**
+     * Конструктор по умолчанию - использует реальную форму
+     */
+    public BaseUiTest() {
+        this(new LoginForm());
+    }
+
+    /**
+     * Конструктор с параметром для внедрения зависимости
+     * @param loginForm форма логина (может быть реальной или моком)
+     */
+    public BaseUiTest(LoginFormInterface loginForm) {
+        this.loginForm = loginForm;
+    }
 
     @BeforeAll
     static void setUpAll() {
@@ -27,7 +45,7 @@ public abstract class BaseUiTest {
         log.info("Начинаем тест: {}", testInfo.getDisplayName());
 //        clearBrowserCookies();
 //        clearBrowserLocalStorage();
-        loginPage = new LoginPage().openPage();
+        loginPage = new LoginPage(loginForm).openPage();
     }
 
     @AfterEach
