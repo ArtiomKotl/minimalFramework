@@ -1,5 +1,6 @@
 package com.framework.pages;
 
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Cookie;
 
@@ -21,7 +22,7 @@ public abstract class BasePage<T extends BasePage<T>> {
         return (T) this;
     }
 
-    protected abstract String getPageLoadedElement();
+    protected abstract SelenideElement getPageLoadedElement();
 
     public T addCookie(String name, String value) {
         WebDriverRunner.getWebDriver().manage().addCookie(new Cookie(name, value));

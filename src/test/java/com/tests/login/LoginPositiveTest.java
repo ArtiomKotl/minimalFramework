@@ -1,5 +1,7 @@
 package com.tests.login;
 
+import com.framework.forms.LoginForm;
+import com.framework.forms.form.UIform;
 import com.framework.models.UserDto;
 import com.framework.models.UserModel;
 import com.framework.pages.DashboardPage;
@@ -16,6 +18,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Feature("Позитивные сценарии")
 @DisplayName("Тесты успешной авторизации")
 public class LoginPositiveTest extends BaseUiTest {
+
+
+//    public LoginPositiveTest(LoginForm loginForm) {
+//        super(loginForm);
+//    }
 
     @Test
     @Severity(SeverityLevel.CRITICAL)

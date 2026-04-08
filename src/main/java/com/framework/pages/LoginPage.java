@@ -1,5 +1,9 @@
 package com.framework.pages;
 
+import com.codeborne.selenide.SelenideElement;
+import com.framework.forms.LoginForm;
+import com.framework.forms.LoginFormInterface;
+import com.framework.forms.form.UIform;
 import com.framework.models.UserDto;
 import io.qameta.allure.Step;
 
@@ -10,11 +14,13 @@ import static com.codeborne.selenide.Selenide.$x;
 public class LoginPage extends BasePage<LoginPage> {
 
     // Селекторы как константы
-    private static final String USERNAME_INPUT = "#email";
-    private static final String PASSWORD_INPUT = "#password";
-    private static final String LOGIN_BUTTON = "//button[text()='Войти']";
-    private static final String ERROR_MESSAGE = ".error-message";
-    private static final String REMEMBER_ME = "#remember";
+
+
+    private final LoginForm loginForm;
+
+    public LoginPage(LoginForm loginForm){
+        this.loginForm = loginForm;
+    }
 
     @Override
     protected String getUrl() {
@@ -22,25 +28,25 @@ public class LoginPage extends BasePage<LoginPage> {
     }
 
     @Override
-    protected String getPageLoadedElement() {
-        return USERNAME_INPUT;
+    protected SelenideElement getPageLoadedElement() {
+        return loginForm.getUserNameInput();
     }
 
     @Step("Ввести логин: {username}")
     public LoginPage enterUsername(String username) {
-        $(USERNAME_INPUT).setValue(username);
+        loginForm.getUserNameInput().setValue(username);
         return this;
     }
 
     @Step("Ввести пароль")
     public LoginPage enterPassword(String password) {
-        $(PASSWORD_INPUT).setValue(password);
+        loginForm.getPasswordInput().setValue(password);
         return this;
     }
 
     @Step("Нажать кнопку входа")
     public LoginPage clickLoginButton() {
-        $x(LOGIN_BUTTON).click();
+        loginForm.getLoginButton().click();
         return this;
     }
 
@@ -58,18 +64,18 @@ public class LoginPage extends BasePage<LoginPage> {
 
     @Step("Отметить чекбокс 'Запомнить меня'")
     public LoginPage checkRememberMe() {
-        $(REMEMBER_ME).click();
+        loginForm.getRememberMe().click();
         return this;
     }
 
     @Step("Проверить сообщение об ошибке")
     public String getErrorMessage() {
-        return $(ERROR_MESSAGE).shouldBe(visible).getText();
+        return loginForm.getErrorMessage().shouldBe(visible).getText();
     }
 
     @Step("Проверить, что отображается ошибка: {expectedError}")
     public LoginPage shouldHaveError(String expectedError) {
-        $(ERROR_MESSAGE).shouldHave(text(expectedError));
+        loginForm.getErrorMessage().shouldHave(text(expectedError));
         return this;
     }
 }
